@@ -1,7 +1,9 @@
 <template>
   <span v-if="isX">X</span>
   <span v-else-if="isO">O</span>
-  <span v-else><button @click="play(row, col)">X</button></span>
+  <span v-else>
+    <button @click="play(row, col)" :disabled="disabled">X</button>
+  </span>
 </template>
 
 <script>
@@ -15,6 +17,7 @@ export default {
   computed: {
     isX() { return getVal(this) === 1; },
     isO() { return getVal(this) === -1; },
+    disabled() { return this.$store.state.done; }
   },
   methods: {
     play(row, col) {
