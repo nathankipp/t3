@@ -32,15 +32,27 @@ const SPOT_VALUES = [
   [1,0,1],
 ];
 
-export const pickSpot = (board) => {
-  let block;
+const winOrBlockFn = board => two => {
+  let choice;
   const getSum = sumFn(board);
   THREES.forEach(triplet => {
     const sum = getSum(triplet);
-    if (sum === 2) {
-      block = triplet.filter(([row, col]) => board[row][col] === 0)[0];
+    if (sum === two) {
+      choice = triplet.filter(([row, col]) => board[row][col] === 0)[0];
     }
   });
+  if (choice) {
+    return choice;
+  }
+}
+
+export const pickSpot = (board) => {
+  const winOrBlock = winOrBlockFn(board);
+  const win = winOrBlock(-2);
+  if (win) {
+    return win;
+  }
+  const block = winOrBlock(2);
   if (block) {
     return block;
   }
