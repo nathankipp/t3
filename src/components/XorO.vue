@@ -2,7 +2,7 @@
   <span v-if="isX">X</span>
   <span v-else-if="isO">O</span>
   <span v-else>
-    <button @click="play(row, col)" :disabled="disabled">X</button>
+    <button @click="play(row, col)" :disabled="disabled" />
   </span>
 </template>
 
@@ -33,7 +33,15 @@ span {
   display: flex;
   height: 2.25rem;
   justify-content: center;
-  padding: 0 .5rem;
+  padding: 0rem;
   width: 2.25rem;
+}
+button {
+  background-color: unset;
+  border: none;
+  color: grey;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
 }
 </style>

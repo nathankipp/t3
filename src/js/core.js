@@ -3,7 +3,7 @@ const sumFn = board => triplet =>
 
 const THREES = [
   [[0,0], [1,1], [2,2]],
-  [[2,2], [1,1], [0,0]],
+  [[0,2], [1,1], [2,0]],
 ];
 for (let i = 0; i < 3; i+=1) {
   THREES.push([[i,0], [i,1], [i,2]]); // row

@@ -8,9 +8,12 @@ const BOARD = [[0,0,0],[0,0,0],[0,0,0]];
 const store = createStore({
   state() {
     return {
+      game: 0,
       board: BOARD,
       turn: 1,
+      choices: [],
       done: false,
+      results: []
     }
   },
   mutations: {
@@ -24,6 +27,7 @@ const store = createStore({
 
       state.board = board;
       state.turn = state.turn * -1;
+      state.choices = [...state.choices, [row, col]];
 
       const winner = getWinner(board);
       const spot = pickSpot(board);
@@ -32,12 +36,21 @@ const store = createStore({
       }
       if (!winner && spot && state.turn === -1) {
         this.commit('play', spot);
+      } else if (winner || !spot) {
+        state.results.push({ winner, choices: state.choices })
       }
     },
     reset(state) {
+      const turn = state.game % 2 ? 1 : -1;
+      state.game = state.game + 1,
       state.board = BOARD;
-      state.turn = 1;
+      state.turn = turn;
+      state.choices = [];
       state.done = false;
+
+      if (turn === -1) {
+        this.commit('play', pickSpot(BOARD));
+      }
     }
   }
 });

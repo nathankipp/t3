@@ -16,6 +16,6 @@ html, body {
   font-size: 2rem;
   margin: 0;
   min-height: 100%;
-  padding: 0;
+  padding: .25rem;
 }
 </style>
